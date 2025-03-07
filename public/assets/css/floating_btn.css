@@ -1,0 +1,21 @@
+
+.floating-button {
+    position: fixed;
+    bottom: 20px; /* Atur jarak dari bawah */
+    right: 20px; /* Atur jarak dari kanan */
+    z-index: 1000; /* Atur urutan lapisan di atas elemen lain */
+}
+
+.floating-button a {
+    display: inline-block; /* Membuat tautan menjadi elemen blok dengan lebar dan tinggi sesuai kontennya */
+    background: url('{{ asset("assets/images/notification-bell.jpg") }}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #25D366;
+    text-decoration: none; /* Menghapus gaya bawaan tautan */
+    padding: 30px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
