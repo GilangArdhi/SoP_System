@@ -18,37 +18,32 @@ class MidtransController extends Controller
 
     public function createTransaction(Request $request)
     {
+        // dd($request->all());
         try {
-            // 🔹 Validasi request tetap diperlukan
-            $validated = $request->validate([
-                'total_price' => 'required|numeric|min:1000'
-            ]);
-    
-            // 🔹 Gunakan data dummy untuk user
-            $dummyUser = [
-                'id' => 999, // ID user fiktif
-                'name' => 'Test User',
-                'email' => 'testuser@example.com'
-            ];
-    
+            $cart = $request->input('cart');
+            if (empty($cart)) {
+                return response()->json(['error' => 'Keranjang kosong!'], 400);
+            }
+
             $order = Order::create([
-                'user_id' => $dummyUser['id'],
+                'user_id' => 1,
                 // 'user_id' => auth()->id(),
-                'total_price' => $validated['total_price'],
+                'total_price' => array_sum(array_column($cart, 'price')),
+                'payment_method' => 'Midtrans',
                 'status' => 'pending'
             ]);
     
             $transaction_details = [
                 'order_id' => $order->id,
-                'gross_amount' => $order->total_price
+                'gross_amount' => array_sum(array_column($cart, 'price'))
             ];
     
             $customer_details = [
                 // 'first_name' => auth()->user()->name,
                 // 'email' => auth()->user()->email,
                 // 'phone' => '08123456789'
-                'first_name' => $dummyUser['name'],
-                'email' => $dummyUser['email'],
+                'first_name' => 'Test User',
+                'email' => 'test@example.com',
                 'phone' => '08123456789' // Dummy phone number
             ];
     

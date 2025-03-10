@@ -8,26 +8,34 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function acashPayment(Request $request) {
-        $cart = $request->cart;
-    
-        // Simpan order ke database
-        $order = Order::create([
-            'user_id' => auth()->id(),
-            'total_price' => array_sum(array_column($cart, 'price')),
-            'status' => 'paid', // Langsung paid karena cash
-            'payment_method' => 'cash'
-        ]);
-    
-        foreach ($cart as $item) {
-            OrderMenu::create([
-                'order_id' => $order->id,
-                'product_name' => $item['name'],
-                'price' => $item['price']
+    public function paymentTransaction(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $cart = $request->input('cart');
+            if (empty($cart)) {
+                return response()->json(['error' => 'Keranjang kosong!'], 400);
+            }
+
+            // Simpan ke database
+            $order = Order::create([
+                'user_id' => 1, // Data dummy untuk debugging
+                'total_price' => array_sum(array_column($cart, 'price')),
+                'payment_method' => "cash",
+                'status' => 'paid'
             ]);
+
+            return response()->json([
+                'success' => true,
+                'order_id' => $order->id
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan saat memproses pembayaran',
+                'message' => $e->getMessage()
+            ], 500);
         }
-    
-        return response()->json(['success' => true, 'order_id' => $order->id]);
     }
     
 }

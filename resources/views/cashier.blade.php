@@ -346,7 +346,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="#">AdminLTE.io</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 3.2.0
@@ -361,6 +361,13 @@
         </div>
         <!-- ./wrapper -->
 
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" 
+                src="https://app.sandbox.midtrans.com/snap/snap.js" 
+                data-client-key="{{ config('services.midtrans.clientKey') }}">
+        </script>
         <!-- Insert Item to The Order Canvas -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
