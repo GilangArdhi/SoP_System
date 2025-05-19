@@ -16,8 +16,7 @@ Sistem Point of Sale (PoS) berbasis Laravel yang dirancang khusus untuk kebutuha
 - Framework: [Laravel](https://laravel.com/)  
 - Bahasa Pemrograman: PHP  
 - Database: MySQL  
-- Frontend: Blade Templating, Bootstrap (jika digunakan)  
-- Autentikasi: Laravel Breeze / Jetstream (jika digunakan)  
+- Frontend: Blade Templating, Bootstrap
 
 ## 🚀 Instalasi
 
